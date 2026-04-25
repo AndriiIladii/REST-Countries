@@ -1,0 +1,8 @@
+.countryList {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: min(100% - 160px, 1280px);
+  margin-inline: auto;
+}
