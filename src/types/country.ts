@@ -28,4 +28,5 @@ export interface Country {
   tld?: string[];
   subregion: string;
   capital?: string[];
+  borders?: string[];
 }

@@ -1,0 +1,20 @@
+.appBody {
+  --bg-color: #fafafa;
+  --element-bg: #ffffff;
+  --text-color: #111517;
+  --input-placeholder: #808080;
+  padding-bottom: 40px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  transition:
+    background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.darkTheme {
+  --bg-color: #202c36;
+  --element-bg: #2b3844;
+  --text-color: #ffffff;
+  --input-placeholder: #ffffff;
+}

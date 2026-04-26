@@ -1,46 +1,90 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import type { Country } from "../../types/country";
+
+import { useNavigate, Link } from "react-router";
+import useCountryData from './../../hooks/useCountryData'
+import styles from './DetailPage.module.scss'
+import { useTheme } from "../../hooks/useTheme";
+import Header from "../../components/Header/Header";
 
 function DetailPage() {
+    const {
+        country, borderCountries
+    } = useCountryData()
+    const navigate = useNavigate();
+    const { darkMode, toggleTheme } = useTheme();
 
-    let { name } = useParams<string>();
-    const [country, setCountry] = useState<Country | null>(null)
-
-    useEffect(() => {
-
-        (async () => {
-            const response = await fetch(`https://restcountries.com/v3.1/name/${name}`);
-            const result = await response.json();
-            console.log(result)
-            setCountry(result[0])
-        })();
-    }, [name])
 
     return (
-        <>
-            {!country ? <p>Loading...</p> :
-                <div>
-                    <button>Back</button>
+        <div className={`appBody ${darkMode ? 'darkTheme' : ''}`}>
+            <Header toggleTheme={toggleTheme} darkMode={darkMode} />
+            <div className={styles.page}>
+                {!country ? <p>Loading...</p> :
+                    <>
+                        <button className={styles.backBtn} onClick={() => navigate(-1)}>
+                            Back
+                        </button>
 
-                    <div>
-                        <div>
-                            <img src={country.flags.png} alt={country.flags.alt} />
-                        </div>
-                        <div>
-                            <p>{Object.values(country.name.nativeName)[0]?.official}</p>
-                            <p>{country.population.toLocaleString('en-US')}</p>
-                            <p>{country.region}</p>
-                            <p>{country.subregion}</p>
-                            <p>{country.capital?.join(', ')}</p>
-                            <p>{country.tld[0]}</p>
-                            <p>{Object.values(country.currencies).map(c => c.name).join(', ')}</p>
-                            <p>{Object.values(country.languages).join(', ')}</p>
+                        <div className={styles.content}>
+                            <div className={styles.flagWrapper}>
+                                <img className={styles.flag} src={country.flags.svg} alt={country.flags.alt} />
+                            </div>
 
+                            <div className={styles.details}>
+                                <h1 className={styles.name}>{country.name.common}</h1>
+
+                                <div className={styles.infoColumns}>
+                                    <div className={styles.infoLeft}>
+                                        <p className={styles.detail}>
+                                            <span className={styles.label}>Native Name: </span>
+                                            {Object.values(country.name.nativeName)[0]?.common}
+                                        </p>
+                                        <p className={styles.detail}>
+                                            <span className={styles.label}>Population: </span>
+                                            {country.population.toLocaleString('en-US')}
+                                        </p>
+                                        <p className={styles.detail}>
+                                            <span className={styles.label}>Region: </span>
+                                            {country.region}
+                                        </p>
+                                        <p className={styles.detail}>
+                                            <span className={styles.label}>Sub Region: </span>
+                                            {country.subregion}
+                                        </p>
+                                        <p className={styles.detail}>
+                                            <span className={styles.label}>Capital: </span>
+                                            {country.capital?.join(', ')}
+                                        </p>
+                                    </div>
+
+                                    <div className={styles.infoRight}>
+                                        <p className={styles.detail}>
+                                            <span className={styles.label}>Top Level Domain: </span>
+                                            {country.tld?.[0]}
+                                        </p>
+                                        <p className={styles.detail}>
+                                            <span className={styles.label}>Currencies: </span>
+                                            {country.currencies ? Object.values(country.currencies).map(c => c.name).join(', ') : 'N/A'}
+                                        </p>
+                                        <p className={styles.detail}>
+                                            <span className={styles.label}>Languages: </span>
+                                            {country.languages ? Object.values(country.languages).join(', ') : 'N/A'}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className={styles.borders}>
+                                    <p className={styles.bordersLabel}>Border Countries:</p>
+                                    <div className={styles.borderTags}>
+                                        {borderCountries.map((item) => {
+                                            return <Link className={styles.borderTag} key={item} to={`/country/${item}`}> {item} </Link>
+                                        })}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>}
-        </>
+                    </>
+                }
+            </div>
+        </div>
     )
 }
 

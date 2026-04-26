@@ -1,21 +1,30 @@
+import { Link } from "react-router-dom";
 import styles from "./Header.module.scss";
-function Header() {
+import darkModeIcon from "../../assets/darkMode.svg";
+import lightModeIcon from "../../assets/lightMode.svg";
+
+
+
+function Header({ toggleTheme, darkMode }) {
 
     return (
+
         <>
             <header>
                 <div className={styles.headerContainer}>
-                    <h1>
+                    <Link to={"/"}><h1>
                         Where in the world?
-                    </h1>
+                    </h1></Link>
                     <div>
-                        <button>Dark Mode</button>
+                        <button className={styles.themeBtn} onClick={toggleTheme}>
+                            {darkMode ? <img src={lightModeIcon} alt="Light Mode" /> : <img src={darkModeIcon} alt="Dark Mode" />}
+                            {darkMode ? "Light Mode" : "Dark Mode"}
+                        </button>
                     </div>
                 </div>
             </header>
         </>
     )
 }
-
 
 export default Header;
