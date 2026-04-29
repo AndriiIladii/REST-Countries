@@ -1,6 +1,10 @@
 import styles from './FilterByRegion.module.scss'
 
-function FilterByRegion({ setSelectedRegion }) {
+interface FilterByRegionProps {
+    setSelectedRegion: (region: string) => void;
+}
+
+function FilterByRegion({ setSelectedRegion }: FilterByRegionProps) {
 
 
     return (

@@ -3,9 +3,12 @@ import styles from "./Header.module.scss";
 import darkModeIcon from "../../assets/darkMode.svg";
 import lightModeIcon from "../../assets/lightMode.svg";
 
+interface HeaderProps {
+    toggleTheme: () => void;
+    darkMode: boolean;
+}
 
-
-function Header({ toggleTheme, darkMode }) {
+function Header({ toggleTheme, darkMode }: HeaderProps) {
 
     return (
 

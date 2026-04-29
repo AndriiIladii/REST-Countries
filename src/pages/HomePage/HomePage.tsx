@@ -11,14 +11,17 @@ function HomePage() {
     const { darkMode, toggleTheme } = useTheme();
     const [countries, setCountries] = useState<Country[]>([])
     const [countryName, setCountryName] = useState('');
-    const [selectedRegion, setSelectedRegion] = useState('')
+    const [selectedRegion, setSelectedRegion] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
 
         (async () => {
+            setIsLoading(true);
             const response = await fetch('https://restcountries.com/v3.1/all?fields=name,flags,population,region,capital');
             const result: Country[] = await response.json();
             setCountries(result.sort(() => Math.random() - 0.5));
+            setIsLoading(false);
         })();
     }, [])
 
@@ -30,7 +33,7 @@ function HomePage() {
                 <SearchByCountry countryName={countryName} setCountryName={setCountryName} />
                 <FilterByRegion setSelectedRegion={setSelectedRegion} />
             </div>
-            <CountriesList countries={countries} selectedRegion={selectedRegion} countryName={countryName} />
+            <CountriesList isLoading={isLoading} countries={countries} selectedRegion={selectedRegion} countryName={countryName} />
         </div>
     )
 }

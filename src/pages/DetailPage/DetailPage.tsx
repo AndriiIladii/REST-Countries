@@ -4,7 +4,7 @@ import useCountryData from './../../hooks/useCountryData'
 import styles from './DetailPage.module.scss'
 import { useTheme } from "../../hooks/useTheme";
 import Header from "../../components/Header/Header";
-import Spinner from "../../components/Spinner/Spinner";
+import SkeletonDetail from "../../components/SkeletonDetail/SkeletonDetail";
 
 function DetailPage() {
     const {
@@ -18,7 +18,7 @@ function DetailPage() {
         <div className={`appBody ${darkMode ? 'darkTheme' : ''}`}>
             <Header toggleTheme={toggleTheme} darkMode={darkMode} />
             <div className={styles.page}>
-                {!country ? <Spinner /> :
+                {!country ? <SkeletonDetail /> :
                     <>
                         <button className={styles.backBtn} onClick={() => navigate(-1)}>
                             Back

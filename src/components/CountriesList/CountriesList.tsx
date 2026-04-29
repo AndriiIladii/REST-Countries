@@ -1,9 +1,27 @@
 import CountryCard from "../CountryCard/CountryCard";
+import SkeletonCard from "../SkeletonCard/SkeletonCard";
 import { Link } from "react-router";
 import styles from './CountryList.module.scss'
 import type { Country } from "../../types/country";
 
-function CountriesList({ countries, selectedRegion, countryName }) {
+interface CountriesListProps {
+    isLoading: boolean;
+    countries: Country[];
+    selectedRegion: string;
+    countryName: string;
+}
+
+function CountriesList({ isLoading, countries, selectedRegion, countryName }: CountriesListProps) {
+
+    if (isLoading) {
+        return (
+            <div className={styles.countryList}>
+                {Array.from({ length: 8 }).map((_, index) => (
+                    <SkeletonCard key={index} />
+                ))}
+            </div>
+        )
+    }
 
     let filteredCountries = countries.filter((country: { name: { common: string; }; region: string; }) => {
         const matchSearch = country.name.common.toLowerCase().includes(countryName.toLocaleLowerCase());

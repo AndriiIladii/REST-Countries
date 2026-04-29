@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import HomePage from "./pages/HomePage/HomePage"
 import DetailPage from "./pages/DetailPage/DetailPage"
 import Page404 from "./components/Page404/Page404"
+import 'react-loading-skeleton/dist/skeleton.css'
 
 function App() {
 

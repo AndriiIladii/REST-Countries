@@ -12,9 +12,19 @@
     color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.appBody .react-loading-skeleton {
+  --base-color: #e2e8f0;
+  --highlight-color: #f1f5f9;
+}
+
 .darkTheme {
   --bg-color: #202c36;
   --element-bg: #2b3844;
   --text-color: #ffffff;
   --input-placeholder: #ffffff;
+}
+
+.darkTheme .react-loading-skeleton {
+  --base-color: #202c36;
+  --highlight-color: #324454;
 }

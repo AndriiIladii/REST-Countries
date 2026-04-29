@@ -1,7 +1,10 @@
 import styles from "./SearchByCountry.module.scss";
+interface SearchByCountryProps {
+    countryName: string;
+    setCountryName: (name: string) => void;
+}
 
-
-function SearchByCountry({ countryName, setCountryName }) {
+function SearchByCountry({ countryName, setCountryName }: SearchByCountryProps) {
 
     return (
         <div className={styles.searchWrapper}>
