@@ -2,8 +2,6 @@
 import { useNavigate, Link } from "react-router";
 import useCountryData from './../../hooks/useCountryData'
 import styles from './DetailPage.module.scss'
-import { useTheme } from "../../hooks/useTheme";
-import Header from "../../components/Header/Header";
 import SkeletonDetail from "../../components/SkeletonDetail/SkeletonDetail";
 
 function DetailPage() {
@@ -11,12 +9,11 @@ function DetailPage() {
         country, borderCountries
     } = useCountryData()
     const navigate = useNavigate();
-    const { darkMode, toggleTheme } = useTheme();
+
 
 
     return (
-        <div className={`appBody ${darkMode ? 'darkTheme' : ''}`}>
-            <Header toggleTheme={toggleTheme} darkMode={darkMode} />
+        <>
             <div className={styles.page}>
                 {!country ? <SkeletonDetail /> :
                     <>
@@ -85,7 +82,7 @@ function DetailPage() {
                     </>
                 }
             </div>
-        </div>
+        </>
     )
 }
 

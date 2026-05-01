@@ -1,73 +1,42 @@
-# React + TypeScript + Vite
+# REST Countries API with Color Theme Switcher
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Design preview for the REST Countries API with color theme switcher coding challenge](./design/desktop-preview.jpg)
 
-Currently, two official plugins are available:
+## 🌍 About The Project
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+This is a complete, responsive Single Page Application (SPA) built with React and TypeScript that integrates with the [REST Countries API](https://restcountries.com) to pull country data and display it like a modern directory. 
 
-## React Compiler
+### 🚀 Key Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* **Complete SPA Experience**: Seamless navigation between the catalog and individual country details without browser reloads.
+* **Premium UX with Skeletons**: Integrated animated Skeleton Screens (`react-loading-skeleton`) that adapt to light and dark themes, eliminating jarring loading states.
+* **Smart Search & Debouncing**: Custom `useDebounce` hook implemented to prevent unnecessary API calls and ensure a silky-smooth search experience.
+* **Global Theme Switcher**: A robust Dark/Light mode toggle that applies CSS Variables across the entire app.
+* **Global State Management**: React Context API (`CountryContext` and `ThemeContext`) used to avoid prop drilling and cache data globally, allowing instant rendering when returning to the home page.
+* **Clean Architecture**: Network logic and `fetch` calls are isolated into a dedicated `services/api.ts` layer.
+* **Responsive Design**: Mobile-first workflow ensuring the UI looks perfect on all screen sizes.
+* **Custom 404 Page**: Catches invalid routes and guides users back to safety.
 
-## Expanding the ESLint configuration
+## 🧠 What I Learned & Practiced
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+This project was a massive leap from writing "just working code" to writing **Enterprise-level Architecture**:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+1. **TypeScript Mastery**: Strictly typed everything from React Props (`Interface`) to Context types and API responses. No `any` types allowed!
+2. **State & Context API**: Defeated "Prop Drilling". Learned how to cache data globally so that components re-render instantly without making redundant network requests.
+3. **Advanced Hooks**: Created a custom `useDebounce` hook. Mastered the intricacies of `useEffect`, `setTimeout`, and cleanup functions to optimize performance.
+4. **SCSS Modules**: Encapsulated styling using CSS modules, completely eliminating global class name collisions (CSS-spaghetti) and ensuring scalable design.
+5. **Clean Architecture (DRY & SOLID)**: 
+   - Moved the Header into a global `<Layout>` wrapper using React Router's `<Outlet>`.
+   - Extracted all API logic (`fetch`, `try/catch`, error handling) into a dedicated service file.
+6. **Programmatic UI Rendering**: Learned how to generate skeleton loaders using `Array.from()` before real data arrives.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🛠 Built With
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+* [React](https://reactjs.org/) (Vite)
+* [TypeScript](https://www.typescriptlang.org/)
+* [React Router](https://reactrouter.com/) (Routing & Layouts)
+* [SCSS Modules](https://sass-lang.com/) (Styling)
+* [React Loading Skeleton](https://www.npmjs.com/package/react-loading-skeleton) (UI states)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🔗 Live Demo
+*(The link to the live deployment will be added here!)*

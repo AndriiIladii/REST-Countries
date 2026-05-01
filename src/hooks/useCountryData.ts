@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import type { Country } from "../types/country";
 import { useState, useEffect } from "react";
+import { getCountryByName, getCountriesByBorderCodes } from "../services/api";
 
 function useCountryData() {
   const { name } = useParams<string>();
@@ -11,19 +12,14 @@ function useCountryData() {
     window.scrollTo(0, 0);
 
     async function fetchData() {
+      if (!name) return;
       try {
-        const response = await fetch(
-          `https://restcountries.com/v3.1/name/${name}`,
-        );
-        const result = await response.json();
+        const result = await getCountryByName(name);
         setCountry(result[0]);
         if (result[0].borders) {
           let borderString = result[0].borders.join(",");
-          const res = await fetch(
-            `https://restcountries.com/v3.1/alpha?codes=${borderString}`,
-          );
-          const data = await res.json();
-          let countries = data.map((item) => item.name.common);
+          const data = await getCountriesByBorderCodes(borderString);
+          let countries = data.map((item: any) => item.name.common);
           setBorderCountries(countries);
         } else {
           setBorderCountries([]);
